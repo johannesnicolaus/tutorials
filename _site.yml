@@ -1,0 +1,18 @@
+name: "Tutorials"
+navbar:
+  title: "Tutorials by Nico"
+  left:
+    - text: "Home"
+      href: index.html
+    - text: "About"
+      href: about.html
+    - text: "List of tutorials"
+      menu:
+        - text: "List of all tutorials"
+          href: publish_article.html
+        - text: "TPM calculation"
+          href: tpm_calculation.html
+        - text: "---"
+        - text: "Article Metadata"
+          href: metadata.html
+      
