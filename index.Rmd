@@ -2,5 +2,9 @@
 title: "My Website"
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
 Hello, Website!
 
