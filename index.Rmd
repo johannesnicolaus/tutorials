@@ -1,10 +1,20 @@
 ---
-title: "My Website"
+title: "Nico's Tutorials Page"
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-Hello, Website!
+<br>
 
+In this website, I will be posting my tutorials.
+
+<br>
+<br>
+
+These tutorials were made by me for the Laboratory of Cell Systems, Institute for Protein Research, Osaka University.
+
+<br>
+
+These tutorials will include mostly R tutorials including other bash tutorials.

@@ -2,20 +2,33 @@ name: "Tutorials"
 output_dir: "."
 navbar:
   title: "Tutorials by Nico"
+  type: "default"
   left:
     - text: "Home"
       href: index.html
-    - text: "About"
-      href: about.html
     - text: "List of tutorials"
       menu:
         - text: "List of all tutorials"
-          href: publish_article.html
+          href: alltuts.html
+        - text: "---"
+        - text: "RNA-seq"
+        - text: "-"
         - text: "TPM calculation"
           href: tpm_calculation.html
         - text: "---"
         - text: "Article Metadata"
-          href: metadata.html 
+    - text: "Personal website"
+      href: https://johannesnicolaus.github.io/index/
+
+  right:
+    - icon: fa-github
+    - icon: fa-twitter
+    - icon: fa-linkedin  
+      href: aaa.com  
+
 output:
   html_document:
-    css: styles.css
+    theme: lumen
+    highlight: tango
+    includes:
+      after_body: footer.html
