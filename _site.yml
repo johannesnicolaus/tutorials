@@ -1,5 +1,5 @@
 name: "Tutorials"
-output_dir: ./
+output_dir: "."
 navbar:
   title: "Tutorials by Nico"
   left:
@@ -15,9 +15,7 @@ navbar:
           href: tpm_calculation.html
         - text: "---"
         - text: "Article Metadata"
-          href: metadata.html
-      
+          href: metadata.html 
 output:
   html_document:
-    highlight: textmate
     css: styles.css
