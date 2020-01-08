@@ -16,7 +16,8 @@ navbar:
         - text: "TPM calculation"
           href: tpm_calculation.html
         - text: "---"
-        - text: "Article Metadata"
+        - text: "Gviz tutorial"
+          href: gviztutorial.html
     - text: "Personal website"
       href: https://johannesnicolaus.github.io/index/
 
