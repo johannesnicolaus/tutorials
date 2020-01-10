@@ -1,0 +1,105 @@
+---
+title: "TPM calculation"
+author: "Johannes Nicolaus Wibisana"
+date: "11/4/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## TPM (transcripts per million) calculation
+
+This tutorial covers transcripts per million calculation with library size normalization using edgeR.
+This tutorial was constructed for The Laboratory of Cell Systems, Institute for Protein Research, Suita, Osaka, Japan.
+
+
+prep our library
+```{r message=FALSE}
+library(tidyverse)
+library(data.table)
+library(edgeR)
+```
+
+let's read our raw counts data
+```{r message=FALSE}
+counts <- read_csv(file = "D:/lab_rmd/tpm/counts_trimmed.csv")
+
+```
+
+Here is how the data should look like
+
+```{r paged.print=TRUE}
+head(counts) 
+```
+
+
+Remove Chr, Start, End, Strand. Only keep geneid, length and samples
+
+```{r}
+counts <- counts[,!colnames(counts) %in% c("Chr", "Start", "End", "Strand")]
+head(counts)
+```
+
+
+Divide the sample read count by the length of the gene multiplied by 1000 
+```{r}
+counts_tpm <- (counts[,3:ncol(counts)]/counts$Length) *1000
+#return to tible just because I like tible
+counts_tpm <- cbind(Geneid = counts$Geneid, counts_tpm) %>% as_tibble()
+
+```
+
+
+Get the normalization factor (in this case RLE)
+```{r}
+normfactor <- DGEList(counts = counts_tpm[,2:ncol(counts_tpm)],
+                        group = colnames(counts_tpm[,2:ncol(counts_tpm)])
+                        )
+
+#you can change the normalization method here
+normfactor <- calcNormFactors(normfactor, method="RLE")
+  
+normfactor_samples <- normfactor$samples
+  
+#multiply normalization factor with the library size
+normfactor_samples$normlib <- normfactor_samples$lib.size*normfactor_samples$norm.factors
+  
+```
+
+
+Loop to get the final TPM counts table
+```{r}
+for(i in 1:(dim(counts_tpm)[2]-1)){
+    
+  counts_tpm[,i+1] <- (counts_tpm[,i+1]/normfactor_samples$normlib[i])*1000000
+    
+}
+
+```
+
+```{r}
+head(counts_tpm)
+
+```
+
+
+
+<!-- ## Comparison between normalized and unnormalized -->
+
+
+
+
+
+
+
+
+
+<!-- You can also embed plots, for example: -->
+
+<!-- ```{r pressure, echo=FALSE} -->
+<!-- plot(pressure) -->
+<!-- ``` -->
+
+<!-- Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot. -->
